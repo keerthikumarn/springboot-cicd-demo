@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: springboot-cicd-demo
+spec:
+  selector:
+    matchLabels:
+      app: springboot-cicd-demo
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: springboot-cicd-demo
+    spec:
+      containers:
+        - name: springboot-cicd-demo
+          image: springboot-cicd-demo:1.0 # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
