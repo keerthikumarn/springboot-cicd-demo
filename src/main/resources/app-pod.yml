@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: springboot-cicd-demo
+  name: springboot-cicd-demo
+spec:
+  containers:
+    - image: springboot-cicd-demo:1.0
+      name: springboot-cicd-demo
+      ports:
+        - containerPort: 8080
+      imagePullPolicy: IfNotPresent
+      env:      
+        - name: SPRING_PROFILE
+          value: dev
+        - name: SPRING_APPLICATION_JSON
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: dev-config.json
+        - name: APP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: username
+        - name: APP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: password
+  restartPolicy: Never 

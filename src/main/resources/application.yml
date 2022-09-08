@@ -1,0 +1,15 @@
+example:
+  app:
+    url: http://www.dev-myapplication.com/login
+    username: local-user
+    password: local-password
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev 
+  app:
+    url: ${demo.app.url}
+    username: ${APP_USERNAME}
+    password: ${APP_PASSWORD}
